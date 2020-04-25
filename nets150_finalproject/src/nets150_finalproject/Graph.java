@@ -15,9 +15,9 @@ public class Graph {
     private String destination; // airport code
     private String date; // on which the person first leaves in yyyy-mm-dd format
     
-    public class Node {
-        private ArrayList<Edge> outEdges;
-        private String airportCode; // e.g., SFO
+    class Node {
+        ArrayList<Edge> outEdges;
+        String airportCode; // e.g., SFO
 //        private String countryCode; // e.g., US - incase we decide to do word
         
         Node(String airportCode) {//, String countryCode) {
@@ -26,7 +26,7 @@ public class Graph {
 //            this.countryCode = countryCode;
         }
         
-        public void addOutEdge(Edge v) {
+        void addOutEdge(Edge v) {
             // don't add the edge if it already exists
             int i = v.getNodeIndex();
             boolean contains = false;
@@ -43,11 +43,11 @@ public class Graph {
 
         }
         
-        public ArrayList<Edge> getOutEdges() {
+        ArrayList<Edge> getOutEdges() {
             return this.outEdges;
         }
         
-        public String getAirport() {
+        String getAirport() {
             return this.airportCode;
         }
         
@@ -57,10 +57,10 @@ public class Graph {
 
     }
     
-    public class Edge {
-        private int v; // reference to the airport's index in the graph arraylist
-        private double price; // min price of flight
-        private String airlineName; // e.g., Alaska Airlines
+    class Edge {
+        int v; // reference to the airport's index in the graph arraylist
+        double price; // min price of flight
+        String airlineName; // e.g., Alaska Airlines
         // TODO: add departure date and time or flight time
         
         Edge(int v, double weight, String airlineName) {
@@ -69,15 +69,15 @@ public class Graph {
             this.airlineName = airlineName;
         }
         
-        public int getNodeIndex() {
+        int getNodeIndex() {
             return this.v;
         }
         
-        public double getPrice() {
+        double getPrice() {
             return this.price;
         }
         
-        public String getAirline() {
+        String getAirline() {
             return this.airlineName;
         }
     }
@@ -94,13 +94,34 @@ public class Graph {
             }
         }
         graph.add(new Node(destination)); // this way destination is at index graph.size - 1
+        constructGraph();
     }
     
     public int getSize() {
         return graph.size();
     }
     
-    public void constructGraph() {
+    public ArrayList<Integer> getOutNeighbors(int i) {
+        ArrayList<Edge> edges = graph.get(i).getOutEdges();
+        ArrayList<Integer> out = new ArrayList<Integer>();
+        for (Edge e : edges) {
+            out.add(e.getNodeIndex());
+        }
+        return out;
+    }
+    
+    public Edge getEdge(int u, int v) {
+        Node start = graph.get(u);
+        ArrayList<Edge> outEdges = start.getOutEdges();
+        for (Edge e: outEdges) {
+            if (e.getNodeIndex() == v) {
+                return e;
+            }
+        }
+        return null;
+    }
+    
+    private void constructGraph() {
         // find the direct flights to all other airports from origin airport
         Node originAirport = graph.get(0);
         for (int i = 1; i < graph.size(); i++) {
@@ -108,8 +129,8 @@ public class Graph {
             String stop1 = stop1Ariport.getAirport();
             JSONObject flight1 = getAPIData(this.origin, stop1, this.date);
             if (flight1 != null) {
-                double price1 = (double) flight1.get("price");
-                String airline1 = (String) flight1.get("airline");
+                double price1 = (double) flight1.get("Price");
+                String airline1 = (String) flight1.get("Airline");
                 Edge e1 = new Edge(i, price1, airline1);
                 originAirport.addOutEdge(e1);
                 // find the direct flights to all other airports (except to origin airport) from this airport
@@ -119,16 +140,16 @@ public class Graph {
                     if (!stop1.equals(this.destination) && !stop2.equals(stop1)) {
                         JSONObject flight2 = getAPIData(stop1, stop2, this.date);
                         if (flight2 != null) {
-                            double price2 = (double) flight2.get("price");
-                            String airline2 = (String) flight2.get("airline");
+                            double price2 = (double) flight2.get("Price");
+                            String airline2 = (String) flight2.get("Airline");
                             Edge e2 = new Edge(j, price2, airline2);
                             stop1Ariport.addOutEdge(e2);
                             // find the direct flights to the destination airport from this airport
                             if (!stop2.equals(this.destination)) {
                                 JSONObject flight3 = getAPIData(stop2, this.destination, this.date);
                                 if (flight3 != null) {
-                                    double price3 = (double) flight3.get("price");
-                                    String airline3 = (String) flight3.get("airline");
+                                    double price3 = (double) flight3.get("Price");
+                                    String airline3 = (String) flight3.get("Airline");
                                     // destination node will be at end of graph list
                                     Edge e3 = new Edge(graph.size() - 1, price3, airline3);
                                     stop2Airport.addOutEdge(e3);
@@ -140,9 +161,12 @@ public class Graph {
                 }
             }
         }
+        printGraph();
     }
     
-    public JSONObject getAPIData(String origin, String destination, String date) {
+    // returns {"Price": double, "Airline": String}
+    @SuppressWarnings("unchecked")
+    private JSONObject getAPIData(String origin, String destination, String date) {
         com.mashape.unirest.http.HttpResponse<String> response;
         String country = "US";
         String currency = "USD";
@@ -173,8 +197,8 @@ public class Graph {
                         String name = (String) obj.get("Name");
                         if (carrier.equals(carrierId)) {
                             JSONObject flightDetails = new JSONObject();
-                            flightDetails.put("price", minPrice);
-                            flightDetails.put("airline", name);
+                            flightDetails.put("Price", minPrice);
+                            flightDetails.put("Airline", name);
                             return flightDetails;
                         }
                     }
@@ -186,8 +210,30 @@ public class Graph {
         }
         return null;
     }
+    
+    // returns [{"Origin": String, "Destination": String, "Price": double, "Airline": String}]
+    @SuppressWarnings("unchecked")
+    public JSONArray getCheapestRoute() {
+        Dijkstra d = new Dijkstra();
+        ArrayList<Integer> route = d.getShortestRoute(this);
+        JSONArray path = new JSONArray();
+        for (int i = 0; i < route.size() - 1; i++) {
+            JSONObject obj = new JSONObject();
+            int u = route.get(i);
+            int v = route.get(i + 1);
+            Node n1 = graph.get(u);
+            Edge edge = getEdge(u, v);
+            Node n2 = graph.get(v);
+            obj.put("Origin", n1.getAirport());
+            obj.put("Destination", n2.getAirport());
+            obj.put("Price", edge.getPrice());
+            obj.put("Airline", edge.getAirline());
+            path.add(obj);
+        }
+        return path;
+    }
 
-    public void printGraph() {
+    private void printGraph() {
         for (Node u : graph) {
             System.out.println("-----");
             String start = u.getAirport();
