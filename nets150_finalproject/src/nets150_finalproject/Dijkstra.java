@@ -13,10 +13,12 @@ public class Dijkstra {
     class Node {
         Integer p; // index of parent in graph list
         double d;
+        String airport;
         
-        Node() {
+        Node(String airport) {
             this.d = Double.MAX_VALUE;
             this.p = null;
+            this.airport = airport;
         }
 
         void setParent(Integer p) {
@@ -76,7 +78,7 @@ public class Dijkstra {
     // src is always index 0
     private void initializeSS(Graph g) {
         for (int i = 0; i < g.getSize(); i++) {
-            nodes.add(new Node());
+            nodes.add(new Node(g.getAirportCode(i)));
         }
         nodes.get(0).setDistance(0);
     }
