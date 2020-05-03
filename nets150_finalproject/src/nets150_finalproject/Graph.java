@@ -1,6 +1,7 @@
 package nets150_finalproject;
 
 import java.util.*;
+import java.util.concurrent.TimeUnit;
 
 import org.json.simple.*;
 import org.json.simple.parser.*;
@@ -183,6 +184,19 @@ public class Graph {
                     .asString();
             JSONParser parser = new JSONParser();
             JSONObject res = (JSONObject) parser.parse(response.getBody());
+            
+            if (res.containsKey("message") && res.get("message").equals("You have exceeded the rate limit per minute for your plan, BASIC, by the API provider")) {
+//                System.out.println("Exceeded api call limit - terminating program");
+//                System.exit(0);
+                TimeUnit.MINUTES.sleep(1);
+                response = Unirest.get("https://skyscanner-skyscanner-flight-search-v1.p.rapidapi.com/apiservices/browsequotes/v1.0/"
+                        + country + "/" + currency + "/" + lang + "/" + origin + "-sky/" + destination + "-sky/" + date)
+                    .header("x-rapidapi-host", "skyscanner-skyscanner-flight-search-v1.p.rapidapi.com")
+                    .header("x-rapidapi-key", "0b94b14200msh8b975854c382fa0p1db856jsn66be75f55f3c")
+                    .asString();
+                res = (JSONObject) parser.parse(response.getBody());
+            }
+//            System.out.println(res);
             JSONArray quotes = (JSONArray) res.get("Quotes");
             JSONArray carriers = (JSONArray) res.get("Carriers");
             if (res == null || quotes == null || carriers == null) {
@@ -212,7 +226,7 @@ public class Graph {
                 } 
             }
             
-        } catch (UnirestException | ParseException e) {
+        } catch (UnirestException | ParseException | InterruptedException e) {
             e.printStackTrace();
         }
         return null;
