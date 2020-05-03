@@ -97,6 +97,10 @@ public class Graph {
         constructGraph();
     }
     
+    public String getAirportCode(int i) {
+        return graph.get(i).airportCode;
+    }
+    
     public int getSize() {
         return graph.size();
     }
@@ -181,6 +185,9 @@ public class Graph {
             JSONObject res = (JSONObject) parser.parse(response.getBody());
             JSONArray quotes = (JSONArray) res.get("Quotes");
             JSONArray carriers = (JSONArray) res.get("Carriers");
+            if (res == null || quotes == null || carriers == null) {
+                return null;
+            }
             for (int i = 0; i < quotes.size(); i++) {
                 JSONObject quote = (JSONObject) quotes.get(i);
                 
