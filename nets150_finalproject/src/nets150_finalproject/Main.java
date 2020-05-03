@@ -7,7 +7,7 @@ public class Main {
 
     public static void main(String[] args) {
         String origin = "PHL";
-        String destination = "VPS";
+        String destination = "MCO";
         String date = "2020-06-01";
         ArrayList<String> airports = new ArrayList<String>();
         airports.add("SFO");
@@ -19,6 +19,8 @@ public class Main {
         airports.add("VPS");
         airports.add("BOS");
         airports.add("ATL");
+        airports.add("MCO");
+        airports.add("IAD");
         
         
         Graph g = new Graph(origin, destination, date, airports);
