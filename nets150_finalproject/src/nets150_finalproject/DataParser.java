@@ -183,7 +183,7 @@ public class DataParser {
             this.options.put("museums", listmuseums);
             this.options.put("beach", listbeach);
             this.options.put("historical", listhistorical);
-            this.options.put("nightlife", listmuseums);
+            this.options.put("nightlife", listnightlife);
             this.options.put("sports", listsport);
             this.options.put("restaurants", listrestaurants);
             this.options.put("outdoor", listoutdoor);
@@ -201,6 +201,15 @@ public class DataParser {
         
             }
     
+    public ArrayList<String> getAllAirports() {
+        ArrayList<String> airports = new ArrayList<String>();
+        
+        for (String city : cityAirportMap.keySet()) {
+            airports.add(cityAirportMap.get(city));
+        }
+        
+        return airports;
+    }
 
                 
   //Returns a list of cities that can be visitied and their airport
