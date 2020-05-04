@@ -3,31 +3,15 @@
 	<classpathentry kind="con" path="org.eclipse.jdt.launching.JRE_CONTAINER/org.eclipse.jdt.internal.debug.ui.launcher.StandardVMType/JavaSE-1.8"/>
 	<classpathentry kind="src" path="src"/>
 	<classpathentry kind="con" path="org.eclipse.jdt.junit.JUNIT_CONTAINER/4"/>
-	<classpathentry kind="lib" path="/Users/riyanarayan/Downloads/unirest-java-1.4.9.jar"/>
-	<classpathentry kind="lib" path="/Users/riyanarayan/Downloads/json-simple-1.1.1.jar"/>
-	<classpathentry kind="lib" path="/Users/riyanarayan/Downloads/httpcomponents-client-5.0/lib/commons-cli-1.4.jar"/>
-	<classpathentry kind="lib" path="/Users/riyanarayan/Downloads/httpcomponents-client-5.0/lib/commons-codec-1.13.jar"/>
-	<classpathentry kind="lib" path="/Users/riyanarayan/Downloads/httpcomponents-client-5.0/lib/httpclient5-5.0.jar"/>
-	<classpathentry kind="lib" path="/Users/riyanarayan/Downloads/httpcomponents-client-5.0/lib/httpclient5-cache-5.0.jar"/>
-	<classpathentry kind="lib" path="/Users/riyanarayan/Downloads/httpcomponents-client-5.0/lib/httpclient5-fluent-5.0.jar"/>
-	<classpathentry kind="lib" path="/Users/riyanarayan/Downloads/httpcomponents-client-5.0/lib/httpclient5-testing-5.0.jar"/>
-	<classpathentry kind="lib" path="/Users/riyanarayan/Downloads/httpcomponents-client-5.0/lib/httpclient5-win-5.0.jar"/>
-	<classpathentry kind="lib" path="/Users/riyanarayan/Downloads/httpcomponents-client-5.0/lib/httpcore5-5.0.jar"/>
-	<classpathentry kind="lib" path="/Users/riyanarayan/Downloads/httpcomponents-client-5.0/lib/httpcore5-h2-5.0.jar"/>
-	<classpathentry kind="lib" path="/Users/riyanarayan/Downloads/httpcomponents-client-5.0/lib/httpcore5-reactive-5.0.jar"/>
-	<classpathentry kind="lib" path="/Users/riyanarayan/Downloads/httpcomponents-client-5.0/lib/httpcore5-testing-5.0.jar"/>
-	<classpathentry kind="lib" path="/Users/riyanarayan/Downloads/httpcomponents-client-5.0/lib/jna-5.2.0.jar"/>
-	<classpathentry kind="lib" path="/Users/riyanarayan/Downloads/httpcomponents-client-5.0/lib/jna-platform-5.2.0.jar"/>
-	<classpathentry kind="lib" path="/Users/riyanarayan/Downloads/httpcomponents-client-5.0/lib/reactive-streams-1.0.2.jar"/>
-	<classpathentry kind="lib" path="/Users/riyanarayan/Downloads/httpcomponents-client-5.0/lib/rxjava-2.2.8.jar"/>
-	<classpathentry kind="lib" path="/Users/riyanarayan/Downloads/httpcomponents-client-5.0/lib/slf4j-api-1.7.25.jar"/>
-	<classpathentry kind="lib" path="/Users/riyanarayan/Downloads/httpcomponents-asyncclient-4.1.4/lib/commons-codec-1.10.jar"/>
-	<classpathentry kind="lib" path="/Users/riyanarayan/Downloads/httpcomponents-asyncclient-4.1.4/lib/commons-logging-1.2.jar"/>
-	<classpathentry kind="lib" path="/Users/riyanarayan/Downloads/httpcomponents-asyncclient-4.1.4/lib/httpasyncclient-4.1.4.jar"/>
-	<classpathentry kind="lib" path="/Users/riyanarayan/Downloads/httpcomponents-asyncclient-4.1.4/lib/httpasyncclient-cache-4.1.4.jar"/>
-	<classpathentry kind="lib" path="/Users/riyanarayan/Downloads/httpcomponents-asyncclient-4.1.4/lib/httpclient-4.5.6.jar"/>
-	<classpathentry kind="lib" path="/Users/riyanarayan/Downloads/httpcomponents-asyncclient-4.1.4/lib/httpclient-cache-4.5.6.jar"/>
-	<classpathentry kind="lib" path="/Users/riyanarayan/Downloads/httpcomponents-asyncclient-4.1.4/lib/httpcore-4.4.10.jar"/>
-	<classpathentry kind="lib" path="/Users/riyanarayan/Downloads/httpcomponents-asyncclient-4.1.4/lib/httpcore-nio-4.4.10.jar"/>
+	<classpathentry kind="lib" path="/Users/nadinewain/Documents/GitHub/Penn2Meet/Penn2MeetAndroid/app/libs/json-simple-1.1.1.jar"/>
+	<classpathentry kind="lib" path="/Users/nadinewain/Downloads/httpcomponents-asyncclient-4.1.4-bin.zip"/>
+	<classpathentry kind="lib" path="/Users/nadinewain/Downloads/httpcomponents-client-5.0-bin (1).zip"/>
+	<classpathentry kind="lib" path="/Users/nadinewain/Downloads/httpcomponents-client-5.0-bin.zip"/>
+	<classpathentry kind="lib" path="/Users/nadinewain/Downloads/unirest-java-1.4.9.jar"/>
+	<classpathentry kind="lib" path="/Users/nadinewain/Downloads/jsoup-1.13.1 (1).jar"/>
+	<classpathentry kind="lib" path="/Users/nadinewain/Downloads/jar_files.zip"/>
+	<classpathentry kind="lib" path="/Users/nadinewain/Downloads/httpcomponents-client-4.5.12-bin.zip"/>
+	<classpathentry kind="lib" path="/Users/nadinewain/Downloads/httpcomponents-core-4.4.13-bin.zip"/>
+	<classpathentry kind="lib" path="/Users/nadinewain/Downloads/httpcomponents-core-5.0-bin.zip"/>
 	<classpathentry kind="output" path="bin"/>
 </classpath>
