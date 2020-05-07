@@ -1,0 +1,38 @@
+—Name of project:
+Oh the places you’ll go….
+
+—Type of project:
+Implementation project that uses graph and graph algorithms and Information networks.
+This is because we web scrape and use an API to get information from the internet and through the help of graph algorithms read our desired outcome (elaborated below by describing the algorithm)
+
+—Project description:
+Our project allows users to find a city to travel to in the United States and provides them with the best flight route. We do this by allowing them to choose from 7 key words that are common traits and attraction people look for when they are planning to travel. We then provide them with a list of cities which have their chosen attribute. The user then specifies their date and airport of departure and the program provides them with the best flight route to travel one.  For example if they are departing from Philadelphia and want to go to a place that has beaches, we would see what destinations fit the requirements and recommend cities. The user will then input their date and airport of departure and we will find the possible flights routes alongside their prices. The best route, which is the cheapest route to the chosen destination, will be displayed to the user.
+
+—Key words user gets to choose from: 
+Museums, beach(es), historical, nightlife, sport(s), restaurants, outdoor activities
+
+—Description of our algorithm:
+	•	We web-scraped https://travel.usnews.com/Destinations/USA/ to find destinations with keywords and the airport associated with that destination this allowed us to form a list of cities that have properties name (X) and also have a separate list of just the airport codes - will iterate through this later
+	•	The user gives us the starting airport and the keyword
+	•	We give the user back a list of cities to go to
+	•	The user selects a city-airport
+	•	The user gives us the date they want to travel on
+	•	We then create a graph - nodes are airports and edges are flights between them with edge-weight as minimum price (and we will store the airline as well)
+	◦	https://rapidapi.com/skyscanner/api/skyscanner-flight-search?endpoint=5aa1eab3e4b00687d3574279
+	•	Start with starting airport and then add edges to each of the other airports
+	•	Then go to the next layer and for each of those airports add edges to all other airports they go to (don’t add an edge back to starting airport)
+	•	Then for the next layer of airports, find flights to the destination airport (that the user entered) - this gives us flight paths with a maximum of 2 layovers
+	•	Run Dijkstra’s Algorithm on this graph from starting airport node to destination airport.
+	•	Throughout our project we have made use of several libraries/JARs such as java swing, jsoup and json simple
+
+Assumptions:
+- We have assumed that the user inputs correct data and press continue to press ok to get the correct answer. If the user presses cancel at any time we assume that they will be terminating the execution of the program.
+- Our API connection is obtained using a basic plan and so we are only permitted to make a certain number of calls per minute. This has resulted in us assuming that a user running our program is aware and satisfied with the time it takes for the program to run
+
+Work breakdown:
+Riya- Worked on connecting to a suitable API and used json simple to parse the data and create a graph to run dijkstra’s.
+Nadine- Worked on web scraping and parsing data from a suitable website to relate USA cities to common attributes and also to their corresponding airports.
+Charles- Worked on the user interface to allow users to be able to interact with the program seamlessly and easily. Ensured that all sections were integrated and working together.
+Together- Testing and Planning.
+
+
